@@ -20,7 +20,7 @@
     "publish": "npm publish dist/swimlane/ngx-datatable"
   },
   "pre-commit": [
-    "build"
+    "build-pkg"
   ],
   "private": true,
   "dependencies": {
