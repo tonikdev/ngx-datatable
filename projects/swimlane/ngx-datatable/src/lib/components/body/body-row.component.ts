@@ -12,7 +12,7 @@ import {
   ChangeDetectorRef,
   DoCheck,
   SkipSelf,
-  OnInit
+  OnInit,
 } from '@angular/core';
 
 import { TreeStatus } from './body-cell.component';
@@ -50,9 +50,6 @@ import { translateXY } from '../../utils/translate';
   `
 })
 export class DataTableBodyRowComponent implements DoCheck, OnInit {
-
-
-
   @Input() set columns(val: any[]) {
     this._columns = val;
     this.recalculateColumns(val);

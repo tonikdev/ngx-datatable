@@ -412,14 +412,14 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   @Input() summaryPosition: string = 'top';
 
   /**
-   * a row was added
-   */
-  @Output() rowInited: EventEmitter<any> = new EventEmitter();
-
-  /**
    * Body was scrolled typically in a `scrollbarV:true` scenario.
    */
   @Output() scroll: EventEmitter<any> = new EventEmitter();
+
+  /**
+   * A row was added
+   */
+  @Output() rowInited: EventEmitter<any> = new EventEmitter();
 
   /**
    * A cell or row was focused via keyboard or mouse click.
@@ -897,10 +897,6 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
     this.cd.detectChanges();
   }
 
-  onRowInited(event: any): void {
-    this.rowInited.emit(event);
-  }
-
   /**
    * The footer triggered a page event.
    */
@@ -921,6 +917,13 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
         selected: this.selected
       });
     }
+  }
+
+  /**
+   * Pass on rowInited event
+   */
+  onRowInited(event: any): void {
+    this.rowInited.emit(event);
   }
 
   /**

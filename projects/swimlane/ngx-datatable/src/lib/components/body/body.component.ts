@@ -79,7 +79,7 @@ import { translateXY } from '../../utils/translate';
             [treeStatus]="group.treeStatus"
             (treeAction)="onTreeAction(group)"
             (activate)="selector.onActivate($event, indexes.first + i)"
-            (rowInited)="onRowInited($event, group)"
+            (rowInited)="onRowInited($event)"
           >
           </datatable-body-row>
           <ng-template #groupedRowsTemplate>
@@ -97,7 +97,7 @@ import { translateXY } from '../../utils/translate';
               [expanded]="getRowExpanded(row)"
               [rowClass]="rowClass"
               (activate)="selector.onActivate($event, i)"
-              (rowInited)="onRowInited($event, row)"
+              (rowInited)="onRowInited($event)"
             >
             </datatable-body-row>
           </ng-template>
@@ -376,6 +376,9 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
     this.updateRows();
   }
 
+  /**
+   * Emit when a new row is added
+   */
   onRowInited(event: any):void {
     this.rowInited.emit(event);
   }
