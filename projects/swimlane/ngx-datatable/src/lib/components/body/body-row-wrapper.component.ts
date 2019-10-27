@@ -52,6 +52,7 @@ export class DataTableRowWrapperComponent implements DoCheck {
   @Input() row: any;
   @Input() groupedRows: any;
   @Output() rowContextmenu = new EventEmitter<{ event: MouseEvent; row: any }>(false);
+  @Output() rowInited = new EventEmitter<{ event: any; row: any }>(false);
 
   @Input() set rowIndex(val: number) {
     this._rowIndex = val;

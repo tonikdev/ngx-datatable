@@ -31,6 +31,7 @@ import { ColumnMode } from 'projects/swimlane/ngx-datatable/src/public-api';
         [scrollbarV]="true"
         [rows]="rows"
         (page)="onPage($event)"
+        (rowInited)="onRowInited($event)"
       >
         <!-- Row Detail Template -->
         <ngx-datatable-row-detail rowHeight="100" #myDetailRow (toggle)="onDetailToggle($event)">
@@ -107,6 +108,10 @@ export class RowDetailsComponent {
     this.timeout = setTimeout(() => {
       console.log('paged!', event);
     }, 100);
+  }
+
+  onRowInited(event) {
+    console.log(`new row added ${event.row.id ? event.row.id : event.row}`);
   }
 
   fetch(cb) {

@@ -412,6 +412,11 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   @Input() summaryPosition: string = 'top';
 
   /**
+   * a row was added
+   */
+  @Output() rowInited: EventEmitter<any> = new EventEmitter();
+
+  /**
    * Body was scrolled typically in a `scrollbarV:true` scenario.
    */
   @Output() scroll: EventEmitter<any> = new EventEmitter();
@@ -452,6 +457,8 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
    * content contains either the column or the row that was clicked.
    */
   @Output() tableContextmenu = new EventEmitter<{ event: MouseEvent; type: ContextmenuType; content: any }>(false);
+  
+  @Output() tableRowAdded: EventEmitter<any> = new EventEmitter();
 
   /**
    * A row was expanded ot collapsed for tree
@@ -631,6 +638,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   _rows: any[];
   _groupRowsBy: string;
   _internalRows: any[];
+  _internalRowsHash: {};
   _internalColumns: TableColumn[];
   _columns: TableColumn[];
   _columnTemplates: QueryList<DataTableColumnDirective>;
@@ -887,6 +895,10 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
     this._offsetX.next(event.offsetX);
     this.scroll.emit(event);
     this.cd.detectChanges();
+  }
+
+  onRowInited(event: any): void {
+    this.rowInited.emit(event);
   }
 
   /**

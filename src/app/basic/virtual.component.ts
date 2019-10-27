@@ -25,6 +25,7 @@ import { ColumnMode } from 'projects/swimlane/ngx-datatable/src/public-api';
         [rowHeight]="getRowHeight"
         [scrollbarV]="true"
         (page)="onPage($event)"
+        (rowInited)="onRowInited($event)"
       >
         <ngx-datatable-column name="Name" width="300">
           <ng-template let-value="value" ngx-datatable-cell-template>
@@ -59,6 +60,10 @@ export class VirtualScrollComponent {
     this.timeout = setTimeout(() => {
       console.log('paged!', event);
     }, 100);
+  }
+
+  onRowInited(event) {
+    console.log(`new row added ${event.row.id ? event.row.id : event.row}`);
   }
 
   fetch(cb) {

@@ -79,6 +79,7 @@ import { translateXY } from '../../utils/translate';
             [treeStatus]="group.treeStatus"
             (treeAction)="onTreeAction(group)"
             (activate)="selector.onActivate($event, indexes.first + i)"
+            (rowInited)="onRowInited($event, group)"
           >
           </datatable-body-row>
           <ng-template #groupedRowsTemplate>
@@ -96,6 +97,7 @@ import { translateXY } from '../../utils/translate';
               [expanded]="getRowExpanded(row)"
               [rowClass]="rowClass"
               (activate)="selector.onActivate($event, i)"
+              (rowInited)="onRowInited($event, row)"
             >
             </datatable-body-row>
           </ng-template>
@@ -224,6 +226,7 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
   @Output() detailToggle: EventEmitter<any> = new EventEmitter();
   @Output() rowContextmenu = new EventEmitter<{ event: MouseEvent; row: any }>(false);
   @Output() treeAction: EventEmitter<any> = new EventEmitter();
+  @Output() rowInited: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(ScrollerComponent, { static: false }) scroller: ScrollerComponent;
 
@@ -371,6 +374,10 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
     this.updateIndexes();
     this.updatePage(event.direction);
     this.updateRows();
+  }
+
+  onRowInited(event: any):void {
+    this.rowInited.emit(event);
   }
 
   /**

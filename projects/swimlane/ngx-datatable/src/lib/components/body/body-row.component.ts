@@ -11,7 +11,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   DoCheck,
-  SkipSelf
+  SkipSelf,
+  OnInit
 } from '@angular/core';
 
 import { TreeStatus } from './body-cell.component';
@@ -48,7 +49,10 @@ import { translateXY } from '../../utils/translate';
     </div>
   `
 })
-export class DataTableBodyRowComponent implements DoCheck {
+export class DataTableBodyRowComponent implements DoCheck, OnInit {
+
+
+
   @Input() set columns(val: any[]) {
     this._columns = val;
     this.recalculateColumns(val);
@@ -131,6 +135,7 @@ export class DataTableBodyRowComponent implements DoCheck {
     return this._columnGroupWidths.total;
   }
 
+  @Output() rowInited: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() treeAction: EventEmitter<any> = new EventEmitter();
 
@@ -250,5 +255,13 @@ export class DataTableBodyRowComponent implements DoCheck {
 
   onTreeAction() {
     this.treeAction.emit();
+  }
+
+  ngOnInit() {
+    this.rowInited.emit({
+      type: 'rowInited',
+      row: this.row,
+      rowElement: this._element
+    });
   }
 }
