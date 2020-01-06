@@ -2489,6 +2489,7 @@
         ];
         DatatableRowDetailDirective.propDecorators = {
             rowHeight: [{ type: core.Input }],
+            rowClass: [{ type: core.Input }],
             _templateInput: [{ type: core.Input, args: ['template',] }],
             _templateQuery: [{ type: core.ContentChild, args: [DatatableRowDetailTemplateDirective, { read: core.TemplateRef, static: true },] }],
             toggle: [{ type: core.Output }]
@@ -2502,6 +2503,8 @@
          * @type {?}
          */
         DatatableRowDetailDirective.prototype.rowHeight;
+        /** @type {?} */
+        DatatableRowDetailDirective.prototype.rowClass;
         /** @type {?} */
         DatatableRowDetailDirective.prototype._templateInput;
         /** @type {?} */
