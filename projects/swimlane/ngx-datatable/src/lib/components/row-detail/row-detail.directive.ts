@@ -8,7 +8,7 @@ export class DatatableRowDetailDirective {
    * when virtual scroll is enabled.
    */
   @Input() rowHeight: number | ((row?: any, index?: number) => number) = 0;
-
+  @Input() rowClass: any;
   @Input('template')
   _templateInput: TemplateRef<any>;
 
